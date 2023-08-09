@@ -21,32 +21,32 @@ public class QuestionController {
 
 	@Autowired
 	QuestionService questionService;
-	
+
 	@GetMapping("allQuestions")
 	public List<Question> getAllQuestions() {
 		return questionService.getAllQuestions();
 	}
-	
+
 	@GetMapping("category/{category}")
-	public List<Question> getQuestionsByCategory(@PathVariable String category){
+	public List<Question> getQuestionsByCategory(@PathVariable String category) {
 		return questionService.getQuestionsByCategory(category);
 	}
 
 	@GetMapping("id/{id}")
-	public Question getQuestionByID(@PathVariable int id){
+	public Question getQuestionByID(@PathVariable int id) {
 		return questionService.getQuestionByID(id);
 	}
-	
+
 	@PostMapping("addQuestion")
 	public String addQuestion(@RequestBody Question question) {
 		return questionService.addQuestion(question);
 	}
-	
-	/*
-	 * @PutMapping("updateQuestion") public String updateQuestion(@RequestBody
-	 * Question question) { return questionService.updateQuestion(question); }
-	 */
-	
+
+	@PutMapping("updateQuestion")
+	public String updateQuestion(@RequestBody Question question) {
+		return null;//questionService.updateQuestion(question);
+	}
+
 	@DeleteMapping("deleteQuestion/{id}")
 	public String deleteQuestionById(@PathVariable Integer id) {
 		return questionService.deleteQuestionById(id);
