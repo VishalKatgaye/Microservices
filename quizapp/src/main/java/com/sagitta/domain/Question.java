@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.Getter;
 
 
 @Entity
@@ -16,7 +15,6 @@ import lombok.Getter;
 public class Question {
 	
 	@Id
-	@Getter
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String category;
