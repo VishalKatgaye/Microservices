@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.sagitta.dao.QuestionDAO;
-import com.sagitta.domain.Question;
+import com.sagitta.domain.Questions;
 
 @Service
 public class QuestionService {
@@ -17,25 +17,25 @@ public class QuestionService {
 	@Autowired
 	QuestionDAO questionDAO;
 
-	public ResponseEntity<List<Question>> getAllQuestions() {
+	public ResponseEntity<List<Questions>> getAllQuestions() {
 		try {
-			return new ResponseEntity<List<Question>>(questionDAO.findAll(), HttpStatus.OK);
+			return new ResponseEntity<List<Questions>>(questionDAO.findAll(), HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<List<Question>>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<List<Questions>>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
 	}
 
-	public ResponseEntity<List<Question>> getQuestionsByCategory(String category) {
+	public ResponseEntity<List<Questions>> getQuestionsByCategory(String category) {
 		try {
-			return new ResponseEntity<List<Question>>(questionDAO.findByCategory(category), HttpStatus.OK);
+			return new ResponseEntity<List<Questions>>(questionDAO.findByCategory(category), HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<List<Question>>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<List<Questions>>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
 	}
 
-	public ResponseEntity<String> addQuestion(Question question) {
+	public ResponseEntity<String> addQuestion(Questions question) {
 		try {
 			questionDAO.save(question);
 			return new ResponseEntity<String>("Question Added Successfully!", HttpStatus.CREATED);
@@ -45,16 +45,16 @@ public class QuestionService {
 			return new ResponseEntity<String>("Question Not Added!", HttpStatus.BAD_REQUEST);
 	}
 
-	public ResponseEntity<Question> getQuestionByID(int id) {
+	public ResponseEntity<Questions> getQuestionByID(int id) {
 		try {
 			return new ResponseEntity<>(questionDAO.findById(id).get(), HttpStatus.OK);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<Question>(new Question(), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Questions>(new Questions(), HttpStatus.BAD_REQUEST);
 	}
 
-	public ResponseEntity<String> updateQuestion(Question question) {
+	public ResponseEntity<String> updateQuestion(Questions question) {
 		try {
 			if (questionDAO.findById(question.getId()).isPresent()) {
 				questionDAO.saveAndFlush(question);
